@@ -3,7 +3,7 @@ services:
     name: universo-origen-web
     env: node
     buildCommand: npm install && npm run build
-    startCommand: NODE_ENV=production node ./server/index.js
+    startCommand: NODE_ENV=production node dist/index.js
     plan: free
     envVars:
       - key: DATABASE_URL
