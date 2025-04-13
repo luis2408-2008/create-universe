@@ -1,0 +1,52 @@
+Everything looks great, but now I need you to finalize the entire project and make it 100% deployment-ready for Render.
+
+Please follow all of these instructions:
+
+⸻
+
+1. Make the Entire Project Ready for Deployment on Render
+	•	Set up the project so it is ready to be deployed at any moment.
+	•	All backend, frontend, and database connections must be fully integrated and working together.
+	•	The app must be structured in a way that I can upload it and deploy it to Render.com with zero extra configuration needed.
+	•	Include:
+	•	render.yaml or required Render-specific configuration files.
+	•	Environment variable support (.env.example if needed).
+	•	Build scripts and start commands for both services.
+	•	Persistent database (PostgreSQL or MongoDB) connected to backend.
+	•	Working API communication between frontend and backend.
+
+⸻
+
+2. Persistent Backend & Database
+	•	Ensure the backend connects to a real database, not in-memory.
+	•	All user data (accounts, logins, content) must be saved permanently.
+	•	No data should be lost upon restart or redeployment.
+	•	Sessions, login states, and database entries must all persist.
+
+⸻
+
+3. Functional & Polished App
+	•	Fix all layout issues (navbar overlaps, menu not opening, etc.).
+	•	Update all placeholder texts and empty sections with real content (like conspiracies, fun facts, scientific theories, etc.).
+	•	Improve section headers and the “Leer más” functionality — make it expand real additional content.
+	•	Make sure all fonts, spacing, and colors have strong contrast and readability.
+	•	Add relevant images and videos that match the theme (cosmos, space, theories, etc.).
+
+⸻
+
+4. Frontend & Backend Communication
+	•	Make sure frontend and backend are fully connected and can communicate via API.
+	•	Ensure login, registration, content display, and logout work properly across both services.
+	•	The frontend must reflect the correct state of the backend and database.
+
+⸻
+
+5. Deliver a Ready-to-Publish Project
+	•	I need the entire app to be deployment-ready from now on.
+	•	It should stay working and fully connected even after updates or refreshes.
+	•	I don’t want to manually connect anything — make sure everything is pre-configured and working.
+	•	Treat it like it’s going to production: clean, efficient, complete.
+
+⸻
+
+Make sure the full app feels like a professional, launch-ready website, not a test or simulation. It must be fully functional, well-styled, responsive, and stable — ready to go live on Render with zero extra effort.

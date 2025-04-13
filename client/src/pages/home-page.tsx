@@ -18,6 +18,7 @@ export default function HomePage() {
   const { theme } = useTheme();
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<string>("scientific");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   // Fetch theories
   const { data: theories = [] } = useQuery<Theory[]>({
@@ -53,49 +54,66 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20">
             {/* Logo and navigation */}
-            <div className="flex items-center gap-10">
+            <div className="flex items-center gap-6 md:gap-10 flex-1">
               {/* Logo */}
-              <div className="flex-shrink-0 flex items-center group">
+              <a href="/" className="flex-shrink-0 flex items-center group">
                 <div className="relative mr-2">
                   <div className="absolute inset-0 rounded-full bg-cosmic-gradient opacity-75 blur-sm group-hover:opacity-100 transition-opacity"></div>
                   <PlanetIcon className="h-8 w-8 text-white relative z-10 animate-pulse-slow" />
                 </div>
                 <div className="flex flex-col">
                   <span className="font-montserrat font-bold text-xl text-white tracking-wide">Universo Origen</span>
-                  <span className="text-xs text-white/60 font-space">Cosmos Explorer</span>
+                  <span className="text-xs text-white/60 font-space hidden sm:block">Cosmos Explorer</span>
                 </div>
-              </div>
+              </a>
               
               {/* Desktop navigation */}
-              <div className="hidden md:flex space-x-6">
-                <a href="#teorias" className="text-white/70 hover:text-white flex items-center gap-2 px-1 py-2 border-b-2 border-transparent hover:border-space-purple transition-all">
+              <div className="hidden md:flex space-x-6 lg:space-x-8">
+                <a 
+                  onClick={() => setActiveTab("scientific")}
+                  href="#teorias" 
+                  className="text-white/70 hover:text-white flex items-center gap-2 px-1 py-2 border-b-2 border-transparent hover:border-space-purple transition-all"
+                >
                   <AtomIcon className="h-4 w-4" />
                   <span>Teorías</span>
                 </a>
-                <a href="#videos" className="text-white/70 hover:text-white flex items-center gap-2 px-1 py-2 border-b-2 border-transparent hover:border-space-indigo transition-all">
+                <a 
+                  onClick={() => setActiveTab("videos")}
+                  href="#videos" 
+                  className="text-white/70 hover:text-white flex items-center gap-2 px-1 py-2 border-b-2 border-transparent hover:border-space-indigo transition-all"
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
                     <path d="m14 12-8.5 6V6l8.5 6Z"/>
                     <path d="M16 6v12h2a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-2Z"/>
                   </svg>
                   <span>Videos</span>
                 </a>
-                <a href="#expertos" className="text-white/70 hover:text-white flex items-center gap-2 px-1 py-2 border-b-2 border-transparent hover:border-space-violet transition-all">
+                <a 
+                  onClick={() => setActiveTab("experts")}
+                  href="#expertos" 
+                  className="text-white/70 hover:text-white flex items-center gap-2 px-1 py-2 border-b-2 border-transparent hover:border-space-violet transition-all"
+                >
                   <AstronautIcon className="h-4 w-4" />
                   <span>Expertos</span>
                 </a>
-                <a href="#explorar" className="text-white/70 hover:text-white flex items-center gap-2 px-1 py-2 border-b-2 border-transparent hover:border-space-pink transition-all">
+                <a 
+                  onClick={() => setActiveTab("conspiracy")} 
+                  href="#teorias-conspiracion" 
+                  className="text-white/70 hover:text-white flex items-center gap-2 px-1 py-2 border-b-2 border-transparent hover:border-space-pink transition-all"
+                >
                   <TelescopeIcon className="h-4 w-4" />
-                  <span>Explorar Más</span>
+                  <span>Conspiraciones</span>
                 </a>
               </div>
             </div>
             
             {/* User menu and theme toggle */}
-            <div className="flex items-center gap-4">
-              {/* Search button */}
+            <div className="flex items-center gap-2 md:gap-4">
+              {/* Search button - only on desktop */}
               <Button 
                 variant="ghost" 
-                className="rounded-full glassmorphism p-2 hidden md:flex items-center gap-2 text-white/80 hover:text-white group hover:shadow-cosmic transition-all">
+                className="rounded-full glassmorphism p-2 hidden lg:flex items-center gap-2 text-white/80 hover:text-white group hover:shadow-cosmic transition-all"
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 group-hover:scale-110 transition-transform">
                   <circle cx="11" cy="11" r="8" />
                   <path d="m21 21-4.3-4.3" />
@@ -106,20 +124,143 @@ export default function HomePage() {
               <ThemeToggle />
               <UserMenu />
               
-              {/* Mobile menu button */}
-              <Button 
-                variant="ghost" 
-                className="md:hidden relative w-10 h-10 rounded-full glassmorphism overflow-hidden hover:shadow-cosmic">
-                <div className="absolute inset-0 bg-gradient-to-tr from-space-indigo/10 to-space-purple/10 opacity-50"></div>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-white">
-                  <line x1="4" x2="20" y1="12" y2="12" />
-                  <line x1="4" x2="20" y1="6" y2="6" />
-                  <line x1="4" x2="20" y1="18" y2="18" />
-                </svg>
-              </Button>
+              {/* Mobile menu button with state */}
+              <div className="md:hidden relative">
+                <Button 
+                  variant="ghost" 
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  className="relative w-10 h-10 rounded-full glassmorphism overflow-hidden hover:shadow-cosmic"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-tr from-space-indigo/10 to-space-purple/10 opacity-50"></div>
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className="h-5 w-5 text-white"
+                  >
+                    {isMobileMenuOpen ? (
+                      // X icon when menu is open
+                      <>
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                      </>
+                    ) : (
+                      // Hamburger icon when menu is closed
+                      <>
+                        <line x1="4" x2="20" y1="12" y2="12" />
+                        <line x1="4" x2="20" y1="6" y2="6" />
+                        <line x1="4" x2="20" y1="18" y2="18" />
+                      </>
+                    )}
+                  </svg>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
+        
+        {/* Mobile menu dropdown */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-cosmic-deep/95 backdrop-blur-md border-t border-white/10 animate-fadeIn">
+            <div className="px-4 py-3 space-y-3">
+              <a 
+                onClick={() => {
+                  setActiveTab("scientific");
+                  setIsMobileMenuOpen(false);
+                }}
+                href="#teorias" 
+                className="text-white flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors"
+              >
+                <div className="w-8 h-8 rounded-full bg-space-purple/20 flex items-center justify-center">
+                  <AtomIcon className="h-4 w-4 text-space-purple" />
+                </div>
+                <span>Teorías Científicas</span>
+              </a>
+              
+              <a 
+                onClick={() => {
+                  setActiveTab("videos");
+                  setIsMobileMenuOpen(false);
+                }}
+                href="#videos" 
+                className="text-white flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors"
+              >
+                <div className="w-8 h-8 rounded-full bg-space-indigo/20 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-space-indigo">
+                    <path d="m14 12-8.5 6V6l8.5 6Z"/>
+                    <path d="M16 6v12h2a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-2Z"/>
+                  </svg>
+                </div>
+                <span>Videos</span>
+              </a>
+              
+              <a 
+                onClick={() => {
+                  setActiveTab("experts");
+                  setIsMobileMenuOpen(false);
+                }}
+                href="#expertos" 
+                className="text-white flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors"
+              >
+                <div className="w-8 h-8 rounded-full bg-space-violet/20 flex items-center justify-center">
+                  <AstronautIcon className="h-4 w-4 text-space-violet" />
+                </div>
+                <span>Opiniones de Expertos</span>
+              </a>
+              
+              <a 
+                onClick={() => {
+                  setActiveTab("conspiracy");
+                  setIsMobileMenuOpen(false);
+                }}
+                href="#teorias-conspiracion" 
+                className="text-white flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors"
+              >
+                <div className="w-8 h-8 rounded-full bg-space-pink/20 flex items-center justify-center">
+                  <TelescopeIcon className="h-4 w-4 text-space-pink" />
+                </div>
+                <span>Conspiraciones</span>
+              </a>
+              
+              <a 
+                onClick={() => {
+                  setActiveTab("fun-fact");
+                  setIsMobileMenuOpen(false);
+                }}
+                href="#curiosidades" 
+                className="text-white flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors"
+              >
+                <div className="w-8 h-8 rounded-full bg-space-cyan/20 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-space-cyan">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4"/>
+                    <path d="M12 8h.01"/>
+                  </svg>
+                </div>
+                <span>Curiosidades</span>
+              </a>
+              
+              {/* Search button in mobile menu */}
+              <div className="px-3 pt-2 pb-3 border-t border-white/10">
+                <div className="relative">
+                  <input 
+                    type="text" 
+                    placeholder="Buscar..." 
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 pl-10 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-space-indigo/50"
+                  />
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 absolute left-3 top-1/2 -translate-y-1/2 text-white/50">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </nav>
       
       {/* Spacer for fixed navbar */}
@@ -327,36 +468,54 @@ export default function HomePage() {
 
               {/* Featured theory section */}
               {featuredTheory && (
-                <div className="mt-16 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-8 shadow-inner transition-colors duration-500">
+                <div className="mt-16 glassmorphism rounded-2xl p-8 shadow-cosmic transition-all duration-500">
                   <div className="flex flex-col md:flex-row gap-8">
                     <div className="md:w-1/2">
-                      <span className="text-sm font-semibold text-[#7e3af2] bg-[#7e3af2]/10 px-3 py-1 rounded-full">Teoría Destacada</span>
-                      <h3 className="text-2xl font-bold font-montserrat text-primary dark:text-white mt-3 mb-4">{featuredTheory.title}</h3>
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      <Badge variant="outline" className="text-sm font-semibold bg-space-purple/10 text-space-purple border-0 px-3 py-1 rounded-full">
+                        Teoría Destacada
+                      </Badge>
+                      <h3 className="text-2xl font-bold font-montserrat text-white mt-3 mb-4">{featuredTheory.title}</h3>
+                      <p className="text-white/80 mb-6">
                         {featuredTheory.description}
                       </p>
-                      <div className="flex items-center space-x-4">
-                        <Button className="bg-[#7e3af2] hover:bg-[#9461fc] text-white px-5 py-2 rounded-lg transition-colors flex items-center">
+                      <div className="flex flex-wrap items-center gap-4">
+                        <Button 
+                          onClick={() => {
+                            // Scroll to the featured theory section
+                            document.getElementById('teorias')?.scrollIntoView({ behavior: 'smooth' });
+                            setActiveTab('featured');
+                          }}
+                          className="bg-gradient-to-r from-space-purple to-space-indigo hover:from-space-indigo hover:to-space-purple text-white px-5 py-2 rounded-xl transition-all duration-300 flex items-center shadow-cosmic-sm hover:shadow-cosmic"
+                        >
                           <span>Explorar en detalle</span>
-                          <ArrowRightIcon className="ml-2 h-4 w-4" />
+                          <ArrowRightIcon className="ml-2 h-4 w-4 animate-pulse-slow" />
                         </Button>
-                        <Button variant="ghost" className="text-[#7e3af2] hover:text-[#f97316] transition-colors flex items-center">
-                          <BookmarkIcon className="mr-1 h-4 w-4" />
+                        <Button 
+                          variant="ghost" 
+                          className="text-white/80 hover:text-white border border-white/20 hover:border-white/40 transition-all duration-300 flex items-center rounded-xl"
+                        >
+                          <BookmarkIcon className="mr-2 h-4 w-4" />
                           <span>Guardar</span>
                         </Button>
                       </div>
                     </div>
                     <div className="md:w-1/2 flex items-center justify-center">
                       <div className="relative w-full max-w-md">
-                        <img 
-                          src={featuredTheory.imageUrl}
-                          alt={`Representación artística de ${featuredTheory.title}`}
-                          className="rounded-xl w-full h-auto shadow-lg"
-                        />
-                        <div className="absolute -bottom-4 -right-4 bg-white dark:bg-gray-900 p-3 rounded-lg shadow-lg transition-colors duration-500">
-                          <div className="text-primary dark:text-white font-space text-sm">Múltiples Universos</div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400">Concepto Visual</div>
+                        {featuredTheory.imageUrl && (
+                          <img 
+                            src={featuredTheory.imageUrl}
+                            alt={`Representación artística de ${featuredTheory.title}`}
+                            className="rounded-xl w-full h-auto shadow-cosmic"
+                          />
+                        )}
+                        <div className="absolute -bottom-4 -right-4 glassmorphism p-3 rounded-lg shadow-cosmic transition-all duration-500">
+                          <div className="text-white font-space text-sm">Múltiples Universos</div>
+                          <div className="text-xs text-white/60">Concepto Visual</div>
                         </div>
+                        
+                        {/* Decorative elements */}
+                        <div className="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-space-purple/30 animate-pulse-slow"></div>
+                        <div className="absolute top-1/4 -right-4 w-6 h-6 rounded-full bg-space-indigo/30 animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
                       </div>
                     </div>
                   </div>
