@@ -12,7 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { PlanetIcon, ArrowRightIcon, MailIcon, BookmarkIcon } from "@/components/icons";
+import { PlanetIcon, ArrowRightIcon, MailIcon, BookmarkIcon, AtomIcon, AstronautIcon, TelescopeIcon } from "@/components/icons";
 
 export default function HomePage() {
   const { theme } = useTheme();
@@ -49,46 +49,232 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white dark:bg-spacedark transition-colors duration-500">
       {/* Navbar */}
-      <nav className="bg-white dark:bg-spacedark shadow-md dark:shadow-primary/50 sticky top-0 z-50 transition-colors duration-500">
+      <nav className="glassmorphism backdrop-blur-md fixed w-full top-0 z-50 transition-all duration-500 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <div className="flex-shrink-0 flex items-center">
-                <PlanetIcon className="h-6 w-6 text-[#f97316] mr-2" />
-                <span className="font-montserrat font-bold text-xl text-primary dark:text-white">Universo Origen</span>
+          <div className="flex justify-between h-20">
+            {/* Logo and navigation */}
+            <div className="flex items-center gap-10">
+              {/* Logo */}
+              <div className="flex-shrink-0 flex items-center group">
+                <div className="relative mr-2">
+                  <div className="absolute inset-0 rounded-full bg-cosmic-gradient opacity-75 blur-sm group-hover:opacity-100 transition-opacity"></div>
+                  <PlanetIcon className="h-8 w-8 text-white relative z-10 animate-pulse-slow" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-montserrat font-bold text-xl text-white tracking-wide">Universo Origen</span>
+                  <span className="text-xs text-white/60 font-space">Cosmos Explorer</span>
+                </div>
+              </div>
+              
+              {/* Desktop navigation */}
+              <div className="hidden md:flex space-x-6">
+                <a href="#teorias" className="text-white/70 hover:text-white flex items-center gap-2 px-1 py-2 border-b-2 border-transparent hover:border-space-purple transition-all">
+                  <AtomIcon className="h-4 w-4" />
+                  <span>Teorías</span>
+                </a>
+                <a href="#videos" className="text-white/70 hover:text-white flex items-center gap-2 px-1 py-2 border-b-2 border-transparent hover:border-space-indigo transition-all">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+                    <path d="m14 12-8.5 6V6l8.5 6Z"/>
+                    <path d="M16 6v12h2a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-2Z"/>
+                  </svg>
+                  <span>Videos</span>
+                </a>
+                <a href="#expertos" className="text-white/70 hover:text-white flex items-center gap-2 px-1 py-2 border-b-2 border-transparent hover:border-space-violet transition-all">
+                  <AstronautIcon className="h-4 w-4" />
+                  <span>Expertos</span>
+                </a>
+                <a href="#explorar" className="text-white/70 hover:text-white flex items-center gap-2 px-1 py-2 border-b-2 border-transparent hover:border-space-pink transition-all">
+                  <TelescopeIcon className="h-4 w-4" />
+                  <span>Explorar Más</span>
+                </a>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
+            
+            {/* User menu and theme toggle */}
+            <div className="flex items-center gap-4">
+              {/* Search button */}
+              <Button 
+                variant="ghost" 
+                className="rounded-full glassmorphism p-2 hidden md:flex items-center gap-2 text-white/80 hover:text-white group hover:shadow-cosmic transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 group-hover:scale-110 transition-transform">
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.3-4.3" />
+                </svg>
+                <span className="text-sm">Buscar</span>
+              </Button>
+              
               <ThemeToggle />
               <UserMenu />
+              
+              {/* Mobile menu button */}
+              <Button 
+                variant="ghost" 
+                className="md:hidden relative w-10 h-10 rounded-full glassmorphism overflow-hidden hover:shadow-cosmic">
+                <div className="absolute inset-0 bg-gradient-to-tr from-space-indigo/10 to-space-purple/10 opacity-50"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-white">
+                  <line x1="4" x2="20" y1="12" y2="12" />
+                  <line x1="4" x2="20" y1="6" y2="6" />
+                  <line x1="4" x2="20" y1="18" y2="18" />
+                </svg>
+              </Button>
             </div>
           </div>
         </div>
       </nav>
+      
+      {/* Spacer for fixed navbar */}
+      <div className="h-20"></div>
 
       {/* Main content */}
       <main>
         {/* Hero section */}
-        <section className="relative overflow-hidden bg-primary dark:bg-spacedark pb-8 transition-colors duration-500">
-          <div className="absolute inset-0 opacity-30" style={starBackground}></div>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24 relative z-10">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-montserrat text-white text-center mb-4 leading-tight">
-              El Origen del Universo
-            </h1>
-            <p className="text-white/80 text-xl md:text-2xl text-center max-w-3xl mx-auto">
-              Explorando teorías científicas, misterios cósmicos y las grandes preguntas sobre nuestra existencia
-            </p>
+        <section className="relative overflow-hidden min-h-[85vh] flex items-center justify-center">
+          {/* Background with stars and nebula effect */}
+          <div className="absolute inset-0 bg-cosmic-deep">
+            {/* Animated star field */}
+            <div className="absolute inset-0 bg-star-pattern bg-[length:50px_50px] opacity-60"></div>
             
-            {/* Animated galaxy/cosmos illustration */}
-            <div className="mt-12 flex justify-center">
-              <div className="relative w-64 h-64">
-                <div className="absolute inset-0 rounded-full bg-[#7e3af2]/20 animate-pulse"></div>
-                <div className="absolute inset-4 rounded-full bg-primary dark:bg-spacedark border-4 border-[#7e3af2] animate-spin" style={{ animationDuration: '20s' }}></div>
-                <div className="absolute w-4 h-4 bg-[#f97316] rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
-                <div className="absolute w-2 h-2 bg-white rounded-full top-1/3 right-1/4"></div>
-                <div className="absolute w-3 h-3 bg-white/70 rounded-full bottom-1/4 left-1/3"></div>
+            {/* Animated nebula/galaxy effect */}
+            <div className="absolute w-full h-full overflow-hidden">
+              <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] rounded-full bg-space-purple/10 animate-pulse-slow blur-[100px]"></div>
+              <div className="absolute bottom-1/3 -right-20 w-[600px] h-[600px] rounded-full bg-space-indigo/10 animate-pulse-slow blur-[100px]" style={{ animationDelay: "1s" }}></div>
+              <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-space-violet/10 animate-pulse-slow blur-[120px]" style={{ animationDelay: "2s" }}></div>
+              <div className="absolute bottom-1/4 left-1/3 w-[350px] h-[350px] rounded-full bg-space-pink/10 animate-pulse-slow blur-[80px]" style={{ animationDelay: "3s" }}></div>
+            </div>
+            
+            {/* Random twinkling stars */}
+            {[...Array(100)].map((_, i) => (
+              <div 
+                key={i}
+                className="absolute rounded-full bg-white animate-pulse-slow"
+                style={{
+                  width: `${Math.random() * 2 + 1}px`,
+                  height: `${Math.random() * 2 + 1}px`,
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  opacity: 0.4 + Math.random() * 0.6,
+                  animationDelay: `${Math.random() * 5}s`,
+                  animationDuration: `${2 + Math.random() * 3}s`
+                }}
+              />
+            ))}
+          </div>
+          
+          {/* Content wrapper */}
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+            <div className="flex flex-col md:flex-row items-center gap-12">
+              {/* Text content */}
+              <div className="md:w-1/2 text-center md:text-left">
+                <div className="inline-block mb-4 px-3 py-1 bg-space-indigo/20 backdrop-blur-sm rounded-full border border-space-indigo/30">
+                  <span className="font-space text-sm text-white/80 tracking-wide">Explorando el Cosmos</span>
+                </div>
+                
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-montserrat text-white mb-6 leading-tight">
+                  <span className="inline-block cosmic-text">El Origen</span> <br />
+                  del Universo
+                </h1>
+                
+                <p className="text-white/80 text-lg md:text-xl mb-8 max-w-lg">
+                  Descubre las teorías científicas, misterios cósmicos y las grandes preguntas sobre nuestra existencia en un viaje por las fronteras del conocimiento humano.
+                </p>
+                
+                <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                  <a 
+                    href="#teorias" 
+                    className="px-6 py-3 bg-gradient-to-r from-space-purple to-space-indigo text-white font-medium rounded-xl flex items-center gap-2 transition-all hover:shadow-cosmic group animate-fadeIn"
+                    style={{ animationDelay: "0.2s" }}
+                  >
+                    <AtomIcon className="h-5 w-5" />
+                    <span>Explorar Teorías</span>
+                    <ArrowRightIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </a>
+                  <a 
+                    href="#videos" 
+                    className="px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium rounded-xl flex items-center gap-2 transition-all hover:bg-white/20 animate-fadeIn"
+                    style={{ animationDelay: "0.4s" }}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                      <path d="m14 12-8.5 6V6l8.5 6Z"/>
+                      <path d="M16 6v12h2a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-2Z"/>
+                    </svg>
+                    <span>Ver Videos</span>
+                  </a>
+                </div>
+                
+                {/* Stats counters with animation */}
+                <div className="flex flex-wrap gap-8 justify-center md:justify-start mt-12 animate-fadeIn" style={{ animationDelay: "0.6s" }}>
+                  <div className="flex flex-col items-center md:items-start">
+                    <span className="font-montserrat text-3xl font-bold text-space-indigo">15+</span>
+                    <span className="text-white/60 text-sm">Teorías Científicas</span>
+                  </div>
+                  <div className="flex flex-col items-center md:items-start">
+                    <span className="font-montserrat text-3xl font-bold text-space-purple">24</span>
+                    <span className="text-white/60 text-sm">Videos Explicativos</span>
+                  </div>
+                  <div className="flex flex-col items-center md:items-start">
+                    <span className="font-montserrat text-3xl font-bold text-space-violet">8</span>
+                    <span className="text-white/60 text-sm">Expertos Científicos</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* 3D animated universe illustration */}
+              <div className="md:w-1/2 flex justify-center">
+                <div className="relative w-full max-w-md h-[400px] flex items-center justify-center perspective-1000">
+                  {/* Outer orbit */}
+                  <div className="absolute w-[350px] h-[350px] rounded-full border border-space-indigo/30 animate-spin-slow" style={{ animationDuration: '30s' }}>
+                    {/* Planet on outer orbit */}
+                    <div className="absolute -top-2 -left-2 w-4 h-4 rounded-full bg-space-indigo shadow-cosmic-lg"></div>
+                  </div>
+                  
+                  {/* Middle orbit */}
+                  <div className="absolute w-[250px] h-[250px] rounded-full border border-space-violet/30 animate-spin-slow" style={{ animationDuration: '20s', animationDirection: 'reverse' }}>
+                    {/* Planet on middle orbit */}
+                    <div className="absolute -bottom-3 -right-3 w-6 h-6 rounded-full bg-space-violet shadow-cosmic-lg"></div>
+                  </div>
+                  
+                  {/* Inner orbit */}
+                  <div className="absolute w-[150px] h-[150px] rounded-full border border-space-purple/30 animate-spin-slow" style={{ animationDuration: '15s' }}>
+                    {/* Planet on inner orbit */}
+                    <div className="absolute top-1/2 -left-2 w-4 h-4 rounded-full bg-space-purple shadow-cosmic-lg"></div>
+                  </div>
+                  
+                  {/* Sun/central object */}
+                  <div className="relative w-20 h-20">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 animate-pulse-slow"></div>
+                    <div className="absolute -inset-3 rounded-full bg-yellow-500/30 blur-md animate-pulse-slow"></div>
+                    <div className="absolute -inset-6 rounded-full bg-yellow-500/10 blur-lg animate-pulse-slow" style={{ animationDelay: '0.5s' }}></div>
+                    <div className="absolute -inset-10 rounded-full bg-orange-500/5 blur-xl animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+                  </div>
+                  
+                  {/* Floating stars */}
+                  {[...Array(20)].map((_, i) => (
+                    <div 
+                      key={i}
+                      className="absolute rounded-full bg-white animate-pulse-slow"
+                      style={{
+                        width: `${Math.random() * 2 + 1}px`,
+                        height: `${Math.random() * 2 + 1}px`,
+                        top: `${Math.random() * 100}%`,
+                        left: `${Math.random() * 100}%`,
+                        opacity: 0.6 + Math.random() * 0.4,
+                        animationDelay: `${Math.random() * 5}s`,
+                        animationDuration: `${2 + Math.random() * 3}s`,
+                        zIndex: Math.floor(Math.random() * 10)
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
+          </div>
+          
+          {/* Scroll indicator */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-float flex flex-col items-center text-white/60">
+            <span className="text-sm mb-2 font-space">Desplázate para descubrir</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
           </div>
         </section>
 
