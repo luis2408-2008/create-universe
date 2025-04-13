@@ -1,0 +1,59 @@
+I want you to create a fully functional and visually stunning website project with both frontend and backend, using modern technologies. The entire interface (UI, text, buttons, content) must be in Spanish. This website should include the following features:
+
+⸻
+
+1. Login & Registration System (Landing Page):
+	•	The user should first see a beautiful, animated login and registration page.
+	•	Registration form must include: username, password, and confirm password.
+	•	Store users securely in a real, persistent database, and validate both login and registration.
+	•	After registering, redirect the user to the login screen automatically.
+	•	Login must verify credentials against the database.
+	•	All forms must be 100% functional and styled professionally with amazing CSS animations.
+	•	Buttons must include hover effects, transitions, and polished visuals.
+	•	Validate inputs (e.g., empty fields, password match).
+	•	Add loading animations and visual feedback for success/error states.
+
+⸻
+
+2. Post-Login Main Page – “El Origen del Universo”:
+
+Once the user logs in successfully, redirect them to the main page titled “El Origen del Universo”. This page must include:
+	•	Toggle for Dark Mode / Light Mode.
+	•	A modern, professional, responsive design.
+	•	Sections for:
+	•	Scientific Theories about the origin of the universe.
+	•	Conspiracies and hidden stories (realistic, speculative, and popular).
+	•	Fun facts and rare curiosities not commonly found online.
+	•	Embedded YouTube videos about space, the big bang, aliens, etc.
+	•	Opinions from scientists and also speculative/conspiratorial theories.
+	•	Diverse, rich content — from Big Bang to Multiverse, religious beliefs, Simulation Theory, and more.
+
+⸻
+
+3. Technical and Aesthetic Requirements:
+	•	A complete frontend and backend, clean and professional.
+	•	Backend should have secure authentication, session/token management, and real data storage.
+	•	Use a real persistent database (not in-memory) like PostgreSQL, MongoDB, or similar.
+	•	Data must persist across restarts and deployments.
+	•	All user information, registration, login, and content must be saved and stay available.
+	•	Frontend must have premium-level UI/UX, responsive design, and next-level CSS animations.
+	•	Use React, Vue, or any modern JS framework for frontend.
+	•	Use Node.js, Flask, or Django for the backend.
+	•	Use modern tools: Tailwind CSS, animations, professional fonts, transitions, interactive elements.
+	•	100% functional — not a simulation or prototype.
+	•	Everything in the UI must be written in Spanish, but codebase can be in English.
+
+⸻
+
+4. Render.com Deployment Ready:
+	•	Structure the entire project to be ready for deployment on Render.com.
+	•	Include all required files and configuration:
+	•	render.yaml or appropriate deployment files.
+	•	Working frontend-backend communication (API calls must work across services).
+	•	Make sure both services (frontend & backend) are ready to be deployed as separate Render web services, with the correct ports and environment settings.
+	•	Include a proper build step, environment variables, and persistent database connection.
+	•	Ensure the deployed app saves and retains data even after reboot or redeploy.
+
+⸻
+
+This website must feel like a real, premium, professional product — deeply informative, visually stunning, and fully functional from start to finish, with real, persistent backend data and a modern design.
