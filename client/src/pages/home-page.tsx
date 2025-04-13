@@ -12,6 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
 import { PlanetIcon, ArrowRightIcon, MailIcon, BookmarkIcon, AtomIcon, AstronautIcon, TelescopeIcon } from "@/components/icons";
 
 export default function HomePage() {
@@ -501,13 +502,11 @@ export default function HomePage() {
                     </div>
                     <div className="md:w-1/2 flex items-center justify-center">
                       <div className="relative w-full max-w-md">
-                        {featuredTheory.imageUrl && (
-                          <img 
-                            src={featuredTheory.imageUrl}
-                            alt={`Representación artística de ${featuredTheory.title}`}
-                            className="rounded-xl w-full h-auto shadow-cosmic"
-                          />
-                        )}
+                        <img 
+                          src={featuredTheory.imageUrl || '/placeholder-image.jpg'}
+                          alt={`Representación artística de ${featuredTheory.title}`}
+                          className="rounded-xl w-full h-auto shadow-cosmic"
+                        />
                         <div className="absolute -bottom-4 -right-4 glassmorphism p-3 rounded-lg shadow-cosmic transition-all duration-500">
                           <div className="text-white font-space text-sm">Múltiples Universos</div>
                           <div className="text-xs text-white/60">Concepto Visual</div>
@@ -561,15 +560,76 @@ export default function HomePage() {
             </TabsContent>
 
             <TabsContent value="conspiracy" className="animate-fadeIn">
-              <h2 className="text-3xl font-bold font-montserrat text-primary dark:text-white mb-8">Conspiraciones & Historias Ocultas</h2>
+              <h2 className="text-3xl font-bold font-montserrat text-primary dark:text-white mb-8">Conspiraciones & Historias Alternativas</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-8">
                 Explora las teorías alternativas sobre el origen del universo, desde las más controvertidas hasta aquellas que desafían el paradigma científico actual.
               </p>
               
-              <div className="flex justify-center items-center h-64 bg-gray-100 dark:bg-gray-800/50 rounded-lg">
-                <p className="text-gray-500 dark:text-gray-400 text-center">
-                  Contenido en desarrollo. ¡Vuelve pronto para descubrir las conspiraciones cósmicas más fascinantes!
-                </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {theories.filter(theory => theory.category === 'conspiracy').map(theory => (
+                  <TheoryCard key={theory.id} theory={theory} />
+                ))}
+                
+                {/* Teorías de conspiración adicionales */}
+                <Card className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-cosmic transition-all duration-300 border border-gray-100 dark:border-gray-800">
+                  <div className="h-48 bg-gray-200 dark:bg-gray-800 relative overflow-hidden">
+                    <img
+                      src="/images/alien-technology.jpg" 
+                      alt="Tecnología Alienígena"
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                    />
+                    <div className="absolute top-3 right-3">
+                      <Badge variant="outline" className="text-xs font-semibold px-2.5 py-1 rounded-full bg-space-pink/10 text-space-pink border-0">
+                        Teoría Alternativa
+                      </Badge>
+                    </div>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold font-montserrat text-primary dark:text-white mb-3">Intervención Extraterrestre</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      Algunas teorías sugieren que civilizaciones avanzadas de otros mundos podrían haber influido en la formación del universo o en etapas posteriores de su evolución mediante tecnologías que trascienden nuestra comprensión actual.
+                    </p>
+                  </CardContent>
+                  <CardFooter className="p-0 px-6 pb-6 flex justify-between items-center">
+                    <span className="text-xs text-gray-500 dark:text-gray-400 font-space">Por: Investigadores Independientes</span>
+                    <Button 
+                      variant="outline" 
+                      className="text-white bg-space-pink hover:bg-space-purple transition-colors rounded-lg px-4"
+                    >
+                      Ver detalle <ArrowRightIcon className="h-4 w-4 ml-1" />
+                    </Button>
+                  </CardFooter>
+                </Card>
+                
+                <Card className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-cosmic transition-all duration-300 border border-gray-100 dark:border-gray-800">
+                  <div className="h-48 bg-gray-200 dark:bg-gray-800 relative overflow-hidden">
+                    <img
+                      src="/images/simulation.jpg" 
+                      alt="Universo como Simulación"
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                    />
+                    <div className="absolute top-3 right-3">
+                      <Badge variant="outline" className="text-xs font-semibold px-2.5 py-1 rounded-full bg-space-pink/10 text-space-pink border-0">
+                        Teoría Alternativa
+                      </Badge>
+                    </div>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold font-montserrat text-primary dark:text-white mb-3">Universo Simulado</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      Esta controvertida teoría propone que nuestro universo es en realidad una simulación computacional creada por una civilización avanzada, explicando así muchas de las extrañas propiedades de la física cuántica.
+                    </p>
+                  </CardContent>
+                  <CardFooter className="p-0 px-6 pb-6 flex justify-between items-center">
+                    <span className="text-xs text-gray-500 dark:text-gray-400 font-space">Popularizada en 2003</span>
+                    <Button 
+                      variant="outline" 
+                      className="text-white bg-space-pink hover:bg-space-purple transition-colors rounded-lg px-4"
+                    >
+                      Ver detalle <ArrowRightIcon className="h-4 w-4 ml-1" />
+                    </Button>
+                  </CardFooter>
+                </Card>
               </div>
             </TabsContent>
 
@@ -579,10 +639,70 @@ export default function HomePage() {
                 Descubre datos fascinantes y poco conocidos sobre nuestro universo, desde fenómenos cósmicos extraños hasta hallazgos científicos sorprendentes.
               </p>
               
-              <div className="flex justify-center items-center h-64 bg-gray-100 dark:bg-gray-800/50 rounded-lg">
-                <p className="text-gray-500 dark:text-gray-400 text-center">
-                  ¡Estamos recopilando las curiosidades más asombrosas del cosmos! Vuelve pronto para explorarlas.
-                </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {theories.filter(theory => theory.category === 'fun-fact').map(theory => (
+                  <TheoryCard key={theory.id} theory={theory} />
+                ))}
+                
+                <Card className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-cosmic transition-all duration-300 border border-gray-100 dark:border-gray-800">
+                  <div className="h-48 bg-gray-200 dark:bg-gray-800 relative overflow-hidden">
+                    <img
+                      src="/images/cosmic-sound.jpg" 
+                      alt="Sonido Cósmico"
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                    />
+                    <div className="absolute top-3 right-3">
+                      <Badge variant="outline" className="text-xs font-semibold px-2.5 py-1 rounded-full bg-space-cyan/10 text-space-cyan border-0">
+                        Curiosidad Cósmica
+                      </Badge>
+                    </div>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold font-montserrat text-primary dark:text-white mb-3">El Sonido del Big Bang</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      El sonido del Big Bang ha sido reconstruido por científicos. Se trataría de un profundo "ommmmm" de baja frecuencia, no muy distinto al que produce un coro de monjes budistas, pero 50 octavas más bajo que cualquier sonido que podamos escuchar.
+                    </p>
+                  </CardContent>
+                  <CardFooter className="p-0 px-6 pb-6 flex justify-between items-center">
+                    <span className="text-xs text-gray-500 dark:text-gray-400 font-space">NASA, 2003</span>
+                    <Button 
+                      variant="outline" 
+                      className="text-white bg-space-cyan hover:bg-space-indigo transition-colors rounded-lg px-4"
+                    >
+                      Ver detalle <ArrowRightIcon className="h-4 w-4 ml-1" />
+                    </Button>
+                  </CardFooter>
+                </Card>
+                
+                <Card className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-cosmic transition-all duration-300 border border-gray-100 dark:border-gray-800">
+                  <div className="h-48 bg-gray-200 dark:bg-gray-800 relative overflow-hidden">
+                    <img
+                      src="/images/universe-scale.jpg" 
+                      alt="Escala del Universo"
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                    />
+                    <div className="absolute top-3 right-3">
+                      <Badge variant="outline" className="text-xs font-semibold px-2.5 py-1 rounded-full bg-space-cyan/10 text-space-cyan border-0">
+                        Curiosidad Cósmica
+                      </Badge>
+                    </div>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold font-montserrat text-primary dark:text-white mb-3">Escala Universal</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      Si el Sol fuera del tamaño de una naranja, la Tierra sería un grano de arena orbitando a 9 metros de distancia, y la estrella más cercana (Próxima Centauri) estaría a 2000 kilómetros.
+                    </p>
+                  </CardContent>
+                  <CardFooter className="p-0 px-6 pb-6 flex justify-between items-center">
+                    <span className="text-xs text-gray-500 dark:text-gray-400 font-space">Estudio ESA, 2019</span>
+                    <Button 
+                      variant="outline" 
+                      className="text-white bg-space-cyan hover:bg-space-indigo transition-colors rounded-lg px-4"
+                    >
+                      Ver detalle <ArrowRightIcon className="h-4 w-4 ml-1" />
+                    </Button>
+                  </CardFooter>
+                </Card>
               </div>
             </TabsContent>
           </Tabs>

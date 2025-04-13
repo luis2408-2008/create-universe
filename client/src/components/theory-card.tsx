@@ -145,7 +145,7 @@ export function TheoryCard({ theory }: TheoryCardProps) {
           {imageUrl && (
             <div className="w-full h-56 sm:h-72 rounded-lg overflow-hidden my-2">
               <img 
-                src={imageUrl} 
+                src={imageUrl || '/placeholder-image.jpg'} 
                 alt={title} 
                 className="w-full h-full object-cover" 
               />
