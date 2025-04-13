@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, date } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -12,10 +12,9 @@ export const theories = pgTable("theories", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   description: text("description").notNull(),
-  category: text("category").notNull(), // scientific, conspiracy, fun-fact
+  category: text("category").notNull(), // scientific, conspiracy, fun-fact, featured
   imageUrl: text("image_url"),
-  source: text("source"),
-  year: text("year"),
+  author: text("author"),
 });
 
 export const videos = pgTable("videos", {
@@ -25,15 +24,18 @@ export const videos = pgTable("videos", {
   thumbnailUrl: text("thumbnail_url"),
   videoUrl: text("video_url").notNull(),
   duration: text("duration"),
+  author: text("author"),
   views: integer("views").default(0),
 });
 
 export const expertOpinions = pgTable("expert_opinions", {
   id: serial("id").primaryKey(),
   expertName: text("expert_name").notNull(),
-  position: text("position").notNull(),
-  opinion: text("opinion").notNull(),
+  title: text("title").notNull(),
+  content: text("content").notNull(),
+  institution: text("institution"),
   imageUrl: text("image_url"),
+  date: text("date"),
 });
 
 export const insertUserSchema = createInsertSchema(users).pick({

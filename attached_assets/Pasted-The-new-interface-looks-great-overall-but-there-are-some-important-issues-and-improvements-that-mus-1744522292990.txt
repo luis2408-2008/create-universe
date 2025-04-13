@@ -1,0 +1,63 @@
+The new interface looks great overall, but there are some important issues and improvements that must be addressed to enhance both design and functionality. Please apply the following fixes and upgrades:
+
+⸻
+
+1. Navigation Bar / Header UI Issues:
+	•	At the top of the website, the header/navigation elements are overlapping.
+	•	For example:
+	•	When clicking the menu (three dots or icons), it doesn’t open or function properly.
+	•	The search bar and header content are colliding with other elements.
+	•	These must be fixed by ensuring that all components have proper spacing, layout, and positioning.
+	•	Every element should have its own space and not overlap with others — make the navigation bar responsive and clean.
+
+⸻
+
+2. Persistent Account Storage Issue:
+	•	Before the last updates, I had created a user account, but it was not saved.
+	•	Please ensure that:
+	•	All registered users are stored in a persistent database.
+	•	No user accounts or sessions should be lost after updates or restarts.
+	•	The user login and registration flow must be 100% reliable and permanent.
+
+⸻
+
+3. Section Titles and Empty Content:
+
+There are some placeholder sections that feel incomplete or misleading. Please make the following updates:
+
+A. “Conspiraciones e historias” section:
+	•	Currently says “contenido en desarrollo” — this is not acceptable.
+	•	Replace this with real, detailed content such as:
+	•	Theories from scientists
+	•	Conspiracies from history and modern day
+	•	Weird facts and uncommon cosmic curiosities
+	•	Add real text, explanations, visuals, and links to videos if possible.
+
+B. Improve Section Titles and Styling:
+	•	Where you have section titles like “Conspiraciones e historias” and another one next to it (the second title), give them both:
+	•	Better design and styling
+	•	High-quality, matching content
+	•	More engaging and readable layouts
+	•	Do not leave any section with just a heading and no content.
+
+⸻
+
+4. “Leer más” Buttons Must Expand Real Content:
+	•	When clicking “Leer más”, it currently doesn’t open any actual content or information.
+	•	Make sure this feature:
+	•	Expands to show real additional content, not just a placeholder.
+	•	Feels useful and worth clicking, not empty or fake.
+
+⸻
+
+5. General Polish & UX Review:
+	•	Ensure all components (headers, buttons, cards, sections) are properly aligned and spaced.
+	•	Review all titles, buttons, and content to make sure everything is:
+	•	Visually appealing
+	•	Functional
+	•	Meaningful
+	•	Consistent across the app
+
+⸻
+
+This site must feel like a finished, high-quality product, not like a prototype or work in progress. Please fix the above issues and polish the design and functionality to match the premium standard we are aiming for.
