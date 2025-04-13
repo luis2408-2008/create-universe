@@ -1,0 +1,46 @@
+The registration and login system works fine, but now I need you to completely redesign and improve the website’s visual experience and content depth. Here is what you must do in detail:
+
+⸻
+
+1. CSS and Visual Redesign:
+	•	Completely replace the current CSS with a brand new modern design.
+	•	The current colors, fonts, and styles lack contrast — many texts are hard to see or blend into the background.
+	•	All text must be easy to read, with high contrast between the text color and the background.
+	•	Use modern fonts, clean typography, and proper spacing.
+	•	Improve the entire color palette — it must look professional, engaging, and readable in both light mode and dark mode.
+	•	Make the site look sleek, futuristic, and visually captivating, especially on first impression.
+
+⸻
+
+2. Better Content & Image Integration:
+	•	Add real, relevant images that match the theme of the website: the origin of the universe, space, time, galaxies, aliens, ancient myths, etc.
+	•	Don’t use generic or random stock photos — use high-quality visuals related to the actual sections.
+	•	Add more real, engaging content: not just titles or placeholders.
+	•	Sections like “Leer más” must actually expand with deeper, meaningful content. Don’t leave those parts empty or static.
+
+⸻
+
+3. YouTube Videos Integration:
+	•	Embed real, working YouTube videos related to space exploration, the Big Bang theory, multiverse, alien life, cosmic mysteries, etc.
+	•	Make sure videos can be played directly within the site and match the context of the section where they’re embedded.
+
+⸻
+
+4. Logout / Re-login Interface:
+	•	When the user logs out and is taken back to the login page, the current design looks ugly and outdated.
+	•	Completely redesign the re-login screen — make it beautiful, animated, modern, and user-friendly.
+	•	It should match the same aesthetic quality as the initial login/registration page.
+
+⸻
+
+5. General Improvements:
+	•	Add more interactive UI elements like button animations, hover effects, section transitions.
+	•	Make sure every part of the site feels alive, rich in content, and visually engaging.
+	•	Everything must be responsive and look great on both desktop and mobile.
+	•	Maintain a clean, readable, and immersive experience for the user throughout the entire site.
+
+⸻
+
+Final Note:
+
+Please rebuild the frontend design from scratch if needed, and make sure the entire site feels premium, modern, interactive, and full of real educational and speculative content. Don’t leave any section feeling empty, basic, or simulated — everything must be 100% real and well-designed.
