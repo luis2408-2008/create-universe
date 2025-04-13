@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+
 import { PlanetIcon, ArrowRightIcon, MailIcon, BookmarkIcon, AtomIcon, AstronautIcon, TelescopeIcon } from "@/components/icons";
 
 export default function HomePage() {
@@ -569,67 +570,14 @@ export default function HomePage() {
                 {theories.filter(theory => theory.category === 'conspiracy').map(theory => (
                   <TheoryCard key={theory.id} theory={theory} />
                 ))}
-                
-                {/* Teorías de conspiración adicionales */}
-                <Card className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-cosmic transition-all duration-300 border border-gray-100 dark:border-gray-800">
-                  <div className="h-48 bg-gray-200 dark:bg-gray-800 relative overflow-hidden">
-                    <img
-                      src="/images/alien-technology.jpg" 
-                      alt="Tecnología Alienígena"
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                    />
-                    <div className="absolute top-3 right-3">
-                      <Badge variant="outline" className="text-xs font-semibold px-2.5 py-1 rounded-full bg-space-pink/10 text-space-pink border-0">
-                        Teoría Alternativa
-                      </Badge>
-                    </div>
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold font-montserrat text-primary dark:text-white mb-3">Intervención Extraterrestre</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      Algunas teorías sugieren que civilizaciones avanzadas de otros mundos podrían haber influido en la formación del universo o en etapas posteriores de su evolución mediante tecnologías que trascienden nuestra comprensión actual.
-                    </p>
-                  </CardContent>
-                  <CardFooter className="p-0 px-6 pb-6 flex justify-between items-center">
-                    <span className="text-xs text-gray-500 dark:text-gray-400 font-space">Por: Investigadores Independientes</span>
-                    <Button 
-                      variant="outline" 
-                      className="text-white bg-space-pink hover:bg-space-purple transition-colors rounded-lg px-4"
-                    >
-                      Ver detalle <ArrowRightIcon className="h-4 w-4 ml-1" />
-                    </Button>
-                  </CardFooter>
-                </Card>
-                
-                <Card className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-cosmic transition-all duration-300 border border-gray-100 dark:border-gray-800">
-                  <div className="h-48 bg-gray-200 dark:bg-gray-800 relative overflow-hidden">
-                    <img
-                      src="/images/simulation.jpg" 
-                      alt="Universo como Simulación"
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                    />
-                    <div className="absolute top-3 right-3">
-                      <Badge variant="outline" className="text-xs font-semibold px-2.5 py-1 rounded-full bg-space-pink/10 text-space-pink border-0">
-                        Teoría Alternativa
-                      </Badge>
-                    </div>
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold font-montserrat text-primary dark:text-white mb-3">Universo Simulado</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      Esta controvertida teoría propone que nuestro universo es en realidad una simulación computacional creada por una civilización avanzada, explicando así muchas de las extrañas propiedades de la física cuántica.
-                    </p>
-                  </CardContent>
-                  <CardFooter className="p-0 px-6 pb-6 flex justify-between items-center">
-                    <span className="text-xs text-gray-500 dark:text-gray-400 font-space">Popularizada en 2003</span>
-                    <Button 
-                      variant="outline" 
-                      className="text-white bg-space-pink hover:bg-space-purple transition-colors rounded-lg px-4"
-                    >
-                      Ver detalle <ArrowRightIcon className="h-4 w-4 ml-1" />
-                    </Button>
-                  </CardFooter>
-                </Card>
+              </div>
+              
+              {/* Placeholder para posibles teorías adicionales */}
+              <div className="mt-12 p-8 border border-dashed border-gray-300 dark:border-gray-700 rounded-lg text-center">
+                <h3 className="text-xl font-bold font-montserrat text-primary dark:text-white mb-3">Más Teorías Pronto</h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Estamos investigando más teorías alternativas fascinantes para añadir a esta sección.
+                </p>
               </div>
             </TabsContent>
 
@@ -643,66 +591,61 @@ export default function HomePage() {
                 {theories.filter(theory => theory.category === 'fun-fact').map(theory => (
                   <TheoryCard key={theory.id} theory={theory} />
                 ))}
+              </div>
+              
+              {/* Sección de curiosidades adicionales */}
+              <div className="mt-12 bg-gray-50 dark:bg-gray-800/50 rounded-xl p-8">
+                <h3 className="text-2xl font-bold font-montserrat text-primary dark:text-white mb-6">¿Sabías que...?</h3>
                 
-                <Card className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-cosmic transition-all duration-300 border border-gray-100 dark:border-gray-800">
-                  <div className="h-48 bg-gray-200 dark:bg-gray-800 relative overflow-hidden">
-                    <img
-                      src="/images/cosmic-sound.jpg" 
-                      alt="Sonido Cósmico"
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                    />
-                    <div className="absolute top-3 right-3">
-                      <Badge variant="outline" className="text-xs font-semibold px-2.5 py-1 rounded-full bg-space-cyan/10 text-space-cyan border-0">
-                        Curiosidad Cósmica
-                      </Badge>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
+                    <div className="flex items-center mb-4">
+                      <div className="w-10 h-10 rounded-full bg-space-cyan/20 flex items-center justify-center mr-4">
+                        <span className="text-space-cyan text-lg font-bold">1</span>
+                      </div>
+                      <h4 className="font-bold text-lg text-primary dark:text-white">El Sonido del Big Bang</h4>
                     </div>
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold font-montserrat text-primary dark:text-white mb-3">El Sonido del Big Bang</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      El sonido del Big Bang ha sido reconstruido por científicos. Se trataría de un profundo "ommmmm" de baja frecuencia, no muy distinto al que produce un coro de monjes budistas, pero 50 octavas más bajo que cualquier sonido que podamos escuchar.
+                    <p className="text-gray-600 dark:text-gray-300">
+                      El sonido del Big Bang ha sido reconstruido por científicos. Se trataría de un profundo "ommmmm" de baja frecuencia, 50 octavas más bajo que cualquier sonido audible.
                     </p>
-                  </CardContent>
-                  <CardFooter className="p-0 px-6 pb-6 flex justify-between items-center">
-                    <span className="text-xs text-gray-500 dark:text-gray-400 font-space">NASA, 2003</span>
-                    <Button 
-                      variant="outline" 
-                      className="text-white bg-space-cyan hover:bg-space-indigo transition-colors rounded-lg px-4"
-                    >
-                      Ver detalle <ArrowRightIcon className="h-4 w-4 ml-1" />
-                    </Button>
-                  </CardFooter>
-                </Card>
-                
-                <Card className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-cosmic transition-all duration-300 border border-gray-100 dark:border-gray-800">
-                  <div className="h-48 bg-gray-200 dark:bg-gray-800 relative overflow-hidden">
-                    <img
-                      src="/images/universe-scale.jpg" 
-                      alt="Escala del Universo"
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                    />
-                    <div className="absolute top-3 right-3">
-                      <Badge variant="outline" className="text-xs font-semibold px-2.5 py-1 rounded-full bg-space-cyan/10 text-space-cyan border-0">
-                        Curiosidad Cósmica
-                      </Badge>
+                  </div>
+                  
+                  <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
+                    <div className="flex items-center mb-4">
+                      <div className="w-10 h-10 rounded-full bg-space-cyan/20 flex items-center justify-center mr-4">
+                        <span className="text-space-cyan text-lg font-bold">2</span>
+                      </div>
+                      <h4 className="font-bold text-lg text-primary dark:text-white">Escala Universal</h4>
                     </div>
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold font-montserrat text-primary dark:text-white mb-3">Escala Universal</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      Si el Sol fuera del tamaño de una naranja, la Tierra sería un grano de arena orbitando a 9 metros de distancia, y la estrella más cercana (Próxima Centauri) estaría a 2000 kilómetros.
+                    <p className="text-gray-600 dark:text-gray-300">
+                      Si el Sol fuera del tamaño de una naranja, la Tierra sería un grano de arena orbitando a 9 metros de distancia, y la estrella más cercana estaría a 2000 kilómetros.
                     </p>
-                  </CardContent>
-                  <CardFooter className="p-0 px-6 pb-6 flex justify-between items-center">
-                    <span className="text-xs text-gray-500 dark:text-gray-400 font-space">Estudio ESA, 2019</span>
-                    <Button 
-                      variant="outline" 
-                      className="text-white bg-space-cyan hover:bg-space-indigo transition-colors rounded-lg px-4"
-                    >
-                      Ver detalle <ArrowRightIcon className="h-4 w-4 ml-1" />
-                    </Button>
-                  </CardFooter>
-                </Card>
+                  </div>
+                  
+                  <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
+                    <div className="flex items-center mb-4">
+                      <div className="w-10 h-10 rounded-full bg-space-cyan/20 flex items-center justify-center mr-4">
+                        <span className="text-space-cyan text-lg font-bold">3</span>
+                      </div>
+                      <h4 className="font-bold text-lg text-primary dark:text-white">Estrellas Increíbles</h4>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      Cada segundo, el Sol convierte 600 millones de toneladas de hidrógeno en helio, liberando más energía que todas las centrales eléctricas de la Tierra producirían en un millón de años.
+                    </p>
+                  </div>
+                  
+                  <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
+                    <div className="flex items-center mb-4">
+                      <div className="w-10 h-10 rounded-full bg-space-cyan/20 flex items-center justify-center mr-4">
+                        <span className="text-space-cyan text-lg font-bold">4</span>
+                      </div>
+                      <h4 className="font-bold text-lg text-primary dark:text-white">Tiempo Relativo</h4>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      Si pudieras viajar a la velocidad de la luz y rodear la Tierra, podrías dar 7.5 vueltas en un solo segundo. La luz del Sol tarda unos 8 minutos en llegar a la Tierra.
+                    </p>
+                  </div>
+                </div>
               </div>
             </TabsContent>
           </Tabs>
