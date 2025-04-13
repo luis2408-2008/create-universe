@@ -1,0 +1,362 @@
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useTheme } from "@/hooks/use-theme";
+import { useAuth } from "@/hooks/use-auth";
+import { Theory, Video, ExpertOpinion } from "@shared/schema";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { UserMenu } from "@/components/user-menu";
+import { TheoryCard } from "@/components/theory-card";
+import { VideoCard } from "@/components/video-card";
+import { ExpertOpinionCard } from "@/components/expert-opinion-card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { PlanetIcon, ArrowRightIcon, MailIcon, BookmarkIcon } from "@/components/icons";
+
+export default function HomePage() {
+  const { theme } = useTheme();
+  const { user } = useAuth();
+  const [activeTab, setActiveTab] = useState<string>("scientific");
+
+  // Fetch theories
+  const { data: theories = [] } = useQuery<Theory[]>({
+    queryKey: ["/api/theories"],
+  });
+
+  // Fetch videos
+  const { data: videos = [] } = useQuery<Video[]>({
+    queryKey: ["/api/videos"],
+  });
+
+  // Fetch expert opinions
+  const { data: expertOpinions = [] } = useQuery<ExpertOpinion[]>({
+    queryKey: ["/api/expert-opinions"],
+  });
+
+  // Filter theories by category for the current tab
+  const filteredTheories = theories.filter(theory => theory.category === activeTab);
+  
+  // Get featured theory (where category is 'featured')
+  const featuredTheory = theories.find(theory => theory.category === 'featured');
+
+  // Star background style
+  const starBackground = {
+    backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)",
+    backgroundSize: "50px 50px"
+  };
+
+  return (
+    <div className="min-h-screen bg-white dark:bg-spacedark transition-colors duration-500">
+      {/* Navbar */}
+      <nav className="bg-white dark:bg-spacedark shadow-md dark:shadow-primary/50 sticky top-0 z-50 transition-colors duration-500">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex items-center">
+              <div className="flex-shrink-0 flex items-center">
+                <PlanetIcon className="h-6 w-6 text-[#f97316] mr-2" />
+                <span className="font-montserrat font-bold text-xl text-primary dark:text-white">Universo Origen</span>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <ThemeToggle />
+              <UserMenu />
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Main content */}
+      <main>
+        {/* Hero section */}
+        <section className="relative overflow-hidden bg-primary dark:bg-spacedark pb-8 transition-colors duration-500">
+          <div className="absolute inset-0 opacity-30" style={starBackground}></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24 relative z-10">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-montserrat text-white text-center mb-4 leading-tight">
+              El Origen del Universo
+            </h1>
+            <p className="text-white/80 text-xl md:text-2xl text-center max-w-3xl mx-auto">
+              Explorando teorías científicas, misterios cósmicos y las grandes preguntas sobre nuestra existencia
+            </p>
+            
+            {/* Animated galaxy/cosmos illustration */}
+            <div className="mt-12 flex justify-center">
+              <div className="relative w-64 h-64">
+                <div className="absolute inset-0 rounded-full bg-[#7e3af2]/20 animate-pulse"></div>
+                <div className="absolute inset-4 rounded-full bg-primary dark:bg-spacedark border-4 border-[#7e3af2] animate-spin" style={{ animationDuration: '20s' }}></div>
+                <div className="absolute w-4 h-4 bg-[#f97316] rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                <div className="absolute w-2 h-2 bg-white rounded-full top-1/3 right-1/4"></div>
+                <div className="absolute w-3 h-3 bg-white/70 rounded-full bottom-1/4 left-1/3"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Main content tabs */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <Tabs defaultValue="scientific" value={activeTab} onValueChange={setActiveTab}>
+            <div className="border-b border-gray-200 dark:border-gray-800 flex overflow-x-auto space-x-8 pb-2 mb-8">
+              <TabsList className="bg-transparent p-0 h-auto">
+                <TabsTrigger 
+                  value="scientific" 
+                  className="text-lg font-medium border-b-2 data-[state=active]:border-[#f97316] border-transparent pb-2 px-1 whitespace-nowrap data-[state=active]:text-[#f97316] text-gray-600 dark:text-gray-400 hover:text-[#f97316] rounded-none shadow-none bg-transparent dark:hover:text-[#f97316]"
+                >
+                  Teorías Científicas
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="conspiracy" 
+                  className="text-lg font-medium border-b-2 data-[state=active]:border-[#f97316] border-transparent pb-2 px-1 whitespace-nowrap data-[state=active]:text-[#f97316] text-gray-600 dark:text-gray-400 hover:text-[#f97316] rounded-none shadow-none bg-transparent dark:hover:text-[#f97316]"
+                >
+                  Conspiraciones & Historias Ocultas
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="fun-fact" 
+                  className="text-lg font-medium border-b-2 data-[state=active]:border-[#f97316] border-transparent pb-2 px-1 whitespace-nowrap data-[state=active]:text-[#f97316] text-gray-600 dark:text-gray-400 hover:text-[#f97316] rounded-none shadow-none bg-transparent dark:hover:text-[#f97316]"
+                >
+                  Curiosidades
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="videos" 
+                  className="text-lg font-medium border-b-2 data-[state=active]:border-[#f97316] border-transparent pb-2 px-1 whitespace-nowrap data-[state=active]:text-[#f97316] text-gray-600 dark:text-gray-400 hover:text-[#f97316] rounded-none shadow-none bg-transparent dark:hover:text-[#f97316]"
+                >
+                  Videos
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="experts" 
+                  className="text-lg font-medium border-b-2 data-[state=active]:border-[#f97316] border-transparent pb-2 px-1 whitespace-nowrap data-[state=active]:text-[#f97316] text-gray-600 dark:text-gray-400 hover:text-[#f97316] rounded-none shadow-none bg-transparent dark:hover:text-[#f97316]"
+                >
+                  Opiniones Expertas
+                </TabsTrigger>
+              </TabsList>
+            </div>
+
+            <TabsContent value="scientific" className="animate-fadeIn">
+              <h2 className="text-3xl font-bold font-montserrat text-primary dark:text-white mb-8">Teorías Científicas</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredTheories.map(theory => (
+                  <TheoryCard key={theory.id} theory={theory} />
+                ))}
+              </div>
+
+              {/* Featured theory section */}
+              {featuredTheory && (
+                <div className="mt-16 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-8 shadow-inner transition-colors duration-500">
+                  <div className="flex flex-col md:flex-row gap-8">
+                    <div className="md:w-1/2">
+                      <span className="text-sm font-semibold text-[#7e3af2] bg-[#7e3af2]/10 px-3 py-1 rounded-full">Teoría Destacada</span>
+                      <h3 className="text-2xl font-bold font-montserrat text-primary dark:text-white mt-3 mb-4">{featuredTheory.title}</h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4">
+                        {featuredTheory.description}
+                      </p>
+                      <div className="flex items-center space-x-4">
+                        <Button className="bg-[#7e3af2] hover:bg-[#9461fc] text-white px-5 py-2 rounded-lg transition-colors flex items-center">
+                          <span>Explorar en detalle</span>
+                          <ArrowRightIcon className="ml-2 h-4 w-4" />
+                        </Button>
+                        <Button variant="ghost" className="text-[#7e3af2] hover:text-[#f97316] transition-colors flex items-center">
+                          <BookmarkIcon className="mr-1 h-4 w-4" />
+                          <span>Guardar</span>
+                        </Button>
+                      </div>
+                    </div>
+                    <div className="md:w-1/2 flex items-center justify-center">
+                      <div className="relative w-full max-w-md">
+                        <img 
+                          src={featuredTheory.imageUrl}
+                          alt={`Representación artística de ${featuredTheory.title}`}
+                          className="rounded-xl w-full h-auto shadow-lg"
+                        />
+                        <div className="absolute -bottom-4 -right-4 bg-white dark:bg-gray-900 p-3 rounded-lg shadow-lg transition-colors duration-500">
+                          <div className="text-primary dark:text-white font-space text-sm">Múltiples Universos</div>
+                          <div className="text-xs text-gray-500 dark:text-gray-400">Concepto Visual</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </TabsContent>
+
+            <TabsContent value="videos" className="animate-fadeIn">
+              <h2 className="text-3xl font-bold font-montserrat text-primary dark:text-white mb-8">Videos Recomendados</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {videos.map(video => (
+                  <VideoCard key={video.id} video={video} />
+                ))}
+              </div>
+              
+              <div className="mt-8 text-center">
+                <Button 
+                  variant="outline" 
+                  className="bg-[#7e3af2]/10 hover:bg-[#7e3af2]/20 text-[#7e3af2] font-semibold py-2 px-6 rounded-lg transition-all duration-300 flex items-center mx-auto"
+                >
+                  <span>Ver más videos</span>
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className="h-4 w-4 ml-2" 
+                    viewBox="0 0 20 20" 
+                    fill="currentColor"
+                  >
+                    <path fillRule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-3.293-3.293a1 1 0 011.414-1.414l4 4z" clipRule="evenodd" />
+                  </svg>
+                </Button>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="experts" className="animate-fadeIn">
+              <h2 className="text-3xl font-bold font-montserrat text-primary dark:text-white mb-12">Opiniones Científicas Destacadas</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {expertOpinions.map(opinion => (
+                  <ExpertOpinionCard key={opinion.id} opinion={opinion} />
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="conspiracy" className="animate-fadeIn">
+              <h2 className="text-3xl font-bold font-montserrat text-primary dark:text-white mb-8">Conspiraciones & Historias Ocultas</h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-8">
+                Explora las teorías alternativas sobre el origen del universo, desde las más controvertidas hasta aquellas que desafían el paradigma científico actual.
+              </p>
+              
+              <div className="flex justify-center items-center h-64 bg-gray-100 dark:bg-gray-800/50 rounded-lg">
+                <p className="text-gray-500 dark:text-gray-400 text-center">
+                  Contenido en desarrollo. ¡Vuelve pronto para descubrir las conspiraciones cósmicas más fascinantes!
+                </p>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="fun-fact" className="animate-fadeIn">
+              <h2 className="text-3xl font-bold font-montserrat text-primary dark:text-white mb-8">Curiosidades del Universo</h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-8">
+                Descubre datos fascinantes y poco conocidos sobre nuestro universo, desde fenómenos cósmicos extraños hasta hallazgos científicos sorprendentes.
+              </p>
+              
+              <div className="flex justify-center items-center h-64 bg-gray-100 dark:bg-gray-800/50 rounded-lg">
+                <p className="text-gray-500 dark:text-gray-400 text-center">
+                  ¡Estamos recopilando las curiosidades más asombrosas del cosmos! Vuelve pronto para explorarlas.
+                </p>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </section>
+
+        {/* Newsletter subscription */}
+        <section className="bg-primary dark:bg-primary-light py-16 transition-colors duration-500">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 md:p-12 shadow-lg">
+              <div className="flex flex-col md:flex-row gap-8 items-center">
+                <div className="md:w-2/3">
+                  <h2 className="text-3xl font-bold font-montserrat text-white mb-4">Mantente informado sobre el cosmos</h2>
+                  <p className="text-white/80 mb-6">
+                    Suscríbete a nuestro boletín para recibir las últimas teorías, descubrimientos y curiosidades sobre el universo directamente en tu correo electrónico.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Input 
+                      type="email" 
+                      placeholder="Tu correo electrónico" 
+                      className="px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-white/50 flex-grow focus:outline-none focus:ring-2 focus:ring-[#f97316]"
+                    />
+                    <Button className="bg-[#f97316] hover:bg-[#fb923c] text-white font-semibold py-3 px-6 rounded-lg transition-colors whitespace-nowrap">
+                      Suscribirse
+                    </Button>
+                  </div>
+                  <p className="text-white/60 text-sm mt-3">
+                    Respetamos tu privacidad. Puedes cancelar la suscripción en cualquier momento.
+                  </p>
+                </div>
+                <div className="md:w-1/3 flex justify-center">
+                  <div className="relative">
+                    <div className="w-40 h-40 rounded-full bg-[#f97316]/30 animate-pulse"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <MailIcon className="h-16 w-16 text-white" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="bg-gray-100 dark:bg-gray-900 py-12 transition-colors duration-500">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div>
+                <div className="flex items-center mb-4">
+                  <PlanetIcon className="h-5 w-5 text-[#f97316] mr-2" />
+                  <span className="font-montserrat font-bold text-xl text-primary dark:text-white">Universo Origen</span>
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  Explorando los misterios del cosmos y las grandes preguntas sobre nuestra existencia.
+                </p>
+                <div className="flex space-x-4">
+                  <a href="#" className="text-gray-400 hover:text-[#f97316]">
+                    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+                      <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                    </svg>
+                  </a>
+                  <a href="#" className="text-gray-400 hover:text-[#f97316]">
+                    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg>
+                  </a>
+                  <a href="#" className="text-gray-400 hover:text-[#f97316]">
+                    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                    </svg>
+                  </a>
+                  <a href="#" className="text-gray-400 hover:text-[#f97316]">
+                    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+                      <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              
+              <div>
+                <h3 className="font-montserrat font-bold text-lg text-primary dark:text-white mb-4">Explorar</h3>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-[#f97316] dark:hover:text-[#f97316]">Teorías Científicas</a></li>
+                  <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-[#f97316] dark:hover:text-[#f97316]">Conspiraciones</a></li>
+                  <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-[#f97316] dark:hover:text-[#f97316]">Curiosidades</a></li>
+                  <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-[#f97316] dark:hover:text-[#f97316]">Biblioteca de Videos</a></li>
+                  <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-[#f97316] dark:hover:text-[#f97316]">Opiniones Expertas</a></li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 className="font-montserrat font-bold text-lg text-primary dark:text-white mb-4">Sobre Nosotros</h3>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-[#f97316] dark:hover:text-[#f97316]">Equipo</a></li>
+                  <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-[#f97316] dark:hover:text-[#f97316]">Misión</a></li>
+                  <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-[#f97316] dark:hover:text-[#f97316]">Colaboradores</a></li>
+                  <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-[#f97316] dark:hover:text-[#f97316]">Contacto</a></li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 className="font-montserrat font-bold text-lg text-primary dark:text-white mb-4">Legal</h3>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-[#f97316] dark:hover:text-[#f97316]">Términos de Uso</a></li>
+                  <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-[#f97316] dark:hover:text-[#f97316]">Política de Privacidad</a></li>
+                  <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-[#f97316] dark:hover:text-[#f97316]">Cookies</a></li>
+                </ul>
+              </div>
+            </div>
+            
+            <Separator className="my-8 border-gray-200 dark:border-gray-800" />
+            
+            <div className="text-center">
+              <p className="text-gray-600 dark:text-gray-400">
+                &copy; {new Date().getFullYear()} Universo Origen. Todos los derechos reservados.
+              </p>
+            </div>
+          </div>
+        </footer>
+      </main>
+    </div>
+  );
+}
